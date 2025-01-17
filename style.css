@@ -97,7 +97,7 @@ ul li span{
 ul li span:hover{
     background-color: rgba(194, 190, 190, 0.432);
 }
-@media(max-width:768px){
+@media(max-width:900px){
     .row{
         margin-left: -14px;
     }
