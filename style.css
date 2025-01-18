@@ -55,25 +55,45 @@ button{
     outline: none;
     cursor: pointer;
 }
-ul li{
-    user-select: none;
-    list-style: none;
-    padding: 12px 8px 12px 50px;
-    font-size: 17px;
-    cursor: pointer;
-    position: relative;
+ul{
+    overflow-y: auto;  /* Enable vertical scrolling */
+    max-height: 300px; /* Set a maximum height */
 }
-ul li::before{
-    content: '';
-    position: absolute;
+ul li {
+    display: flex;                /* Use flexbox for horizontal alignment */
+    align-items: center;          /* Align items vertically */
+    padding: 12px 50px 12px 50px; /* Adjust padding for the left checkbox and right button */
+    font-size: 16px;              /* Font size for readability */
+    position: relative;           /* For pseudo-elements (::before) */
+    flex-wrap: wrap;              /* Allow text to wrap to the next line */
+    gap: 10px;                    /* Add spacing between text and the cross button */
+    word-break: break-word;       /* Prevent long words from overflowing */
+}
+
+ul li::before {
+    content: '';                  /* Checkbox style */
+    position: absolute;           /* Position the checkbox */
     height: 28px;
     width: 28px;
-    border-radius:50%;
-    background-image: url(images/unchecked.png);
+    border-radius: 50%;
+    background-image: url(images/unchecked.png); /* Replace with your image */
     background-size: cover;
     background-position: center;
-    top: 7px;
-    left: 8px;
+    top: 50%;                     /* Vertically center the checkbox */
+    left: 8px;                    /* Position the checkbox at the left */
+    transform: translateY(-50%);
+}
+
+ul li span {
+    position: absolute;           /* Position the cross button */
+    right: 10px;                  /* Align to the right end of the container */
+    top: 50%;                     /* Vertically center it by default */
+    transform: translateY(-50%);
+    cursor: pointer;              /* Show pointer cursor on hover */
+    z-index: 1;                   /* Ensure it appears above other content */
+    padding: 5px;                 /* Make it more tappable */
+    border-radius: 50%;
+    padding: 10px;
 }
 .checked{
     text-decoration: line-through;
@@ -82,21 +102,12 @@ ul li::before{
 .checked::before{
     background-image: url(images/checked.png);
 }
-ul li span{
-    position: absolute;
-    right: 0;
-    top: 3px;
-    width: 40px;
-    height: 40px;
-    font-size: 22px;
-    color: #555;
-    line-height: 40px;
-    text-align: center;
-    border-radius: 50%;
-}
+
 ul li span:hover{
     background-color: rgba(194, 190, 190, 0.432);
 }
+
+
 @media(max-width:768px){
     /* .row{
         margin-left: -14px;
@@ -124,8 +135,29 @@ ul li span:hover{
         padding: 10px; 
         font-size: 14px;
     }
-    ul {
-        max-height: 300px; /* Set a maximum height */
-        overflow-y: auto;  /* Enable vertical scrolling */
+    ul li {
+        font-size: 14px;      /* Reduce text size */
+        padding: 10px 8px 10px 40px; /* Adjust padding */
+        display: grid;                /* Use CSS Grid for flexible alignment */
+        grid-template-columns: 1fr auto; /* 1fr for text, auto for the button */
+        align-items: center;          /* Align items vertically in the grid */
+        padding: 12px 10px;           /* Add padding */
+        font-size: 16px;              /* Adjust font size */
+        gap: 10px;                    /* Add spacing between text and button */
+        word-break: break-word;       /* Break long words to prevent overflow */
+        margin-top: 12px;
     }
+    ul li::before {
+        height: 20px;         /* Shrink the checkbox size */
+        width: 20px;
+        top: 5px;
+        left: 5px;
+    }
+    ul li span {
+        justify-self: end;            /* Align the cross button to the right */
+        align-self: center;           /* Align it vertically to the center of the line */
+        right: 5px; /* Reduce spacing for smaller screens */
+        background-color: rgba(204, 199, 199, 0.61);
+    }
+    
 }
